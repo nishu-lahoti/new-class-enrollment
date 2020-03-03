@@ -22,3 +22,15 @@ enrollment_data_old <- read_xlsx("old-class-enrollment.xlsx", skip = 3) %>% clea
 
 ```
 
+```{r}
+
+five_classes <- enrollment_data_new %>%
+  anti_join(enrollment_data_old, by = "course_id") %>%
+  arrange(desc(total)) %>% 
+  head(5) %>%
+  select(course_id, course_title, course_name, course_department, instructor_full_name, total)
+
+five_classes
+
+```
+
