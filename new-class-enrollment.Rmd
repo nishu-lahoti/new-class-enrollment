@@ -1,0 +1,24 @@
+---
+title: "new-class-enrollment"
+author: "Nishu Lahoti"
+date: "3/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(dplyr)
+library(readxl)
+library(janitor)
+
+download.file("https://registrar.fas.harvard.edu/files/fas-registrar/files/class_enrollment_summary_by_term_2.25.20_0.xlsx", destfile = "./new-class-enrollment.xlsx")
+
+download.file("https://registrar.fas.harvard.edu/files/fas-registrar/files/class_enrollment_summary_by_term_3.22.19_0.xlsx", destfile = "./old-class-enrollment.xlsx")
+
+enrollment_data_new <- read_xlsx("new-class-enrollment.xlsx", skip = 3) %>% clean_names() %>% filter(!is.na(course_name))
+enrollment_data_old <- read_xlsx("old-class-enrollment.xlsx", skip = 3) %>% clean_names() %>% filter(!is.na(course_name))
+
+```
+
